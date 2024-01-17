@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleCadastrarTabela.css">
+    <link rel="stylesheet" href="modalUsuario.css">
+    <title>Cadastro de Usuário</title>
+</head>
+<body onload="getUsuario()">
+    <aside class="siderbar">
+        
+        <nav>
+            <button onclick="abrirCadastroBD()">
+                <span>
+                    <span>Banco de dados</span>
+                </span>
+            </button>
+
+            <button onclick="abrirCadastroUsuario()">
+                <span>
+                    <span>Usuarios</span>
+                </span>
+            </button>
+
+            <button>
+                <span onclick="abrirCadastroColuna()">
+                    <span>Colunas</span>
+                </span>
+            </button>
+
+            <button>
+                <span onclick="abrirCadastoTabela()">
+                    <span>Tabela</span>
+                </span>
+            </button>
+
+            <button>
+                <span>
+                    <span>Gerar Relatorio</span>
+                </span>
+            </button>
+        </nav>
+        
+    </aside>
+    <div class="tabela">
+        <header>
+            <h1>Cadastro de Usuario</h1>
+        </header>
+        <main>
+            <div class="btns-cadastrar-e-adicionar">
+            <button class="btn-cadastrar-bd blue" type="button" onclick="openModal()">Add Usuario</button>
+            <div class="barra-depesquisa">
+                <input type="text" id="pesquisaBD" class="pesquisaBD" name="pesquisaBD" placeholder="Pesquisar Usuario">
+                <button type="button" class="btn-pesquisar" onclick="buscarPorNomeBd()">pesquisar</button>
+            </div>
+
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Código</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="mainTabelaUsuario">
+                    <tr>
+                        <td>xxxxxxx</td>
+                        <td>yyy</td>
+                        <td>
+                            <button id="btnEditar" class="btn-editar" type="button" onclick="">Editar</button>
+                            <button id="btnExcluir" class="btn-excluir" type="button" onclick="Excluir(1)">Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+        <!-- Area abaixo destinada a modal-->
+
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        
+        <div class="inputs" id="inputs">
+            <p class="msg">Cadastrar Usuario</p>
+            <label for="">nome usuário</label>
+            <input type="text" name="nomeUsuario" id="nomeUsuario">
+            <label for="">código de usuário</label>
+            <input type="text" name="codigoUsuario" id="codigoUsuario">
+            <label for="">senha</label>
+            <input type="password" name="senhaUsuario" id="senhaUsuario">
+            <div class="modal-buttons">
+                <button id="btn-salvar-dados-BD" onclick="confirmar()">Cadastrar</button>
+                <button onclick="cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openModal() {
+            document.getElementById('myModal').style.display = 'block';
+            
+        }
+    
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+    
+        function confirmar() {
+            //alert('Ação confirmada!');
+            salvarDadosUsuario();
+            closeModal();
+            
+        }
+    
+        function cancelar() {
+            alert('Ação cancelada.');
+            closeModal();
+        }
+    </script>
+    <script src="main.js"></script>
+    <script src="Usuario.js"></script>
+</body>
+</html>

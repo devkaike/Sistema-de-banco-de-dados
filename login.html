@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleLogin.css">
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+    <title>login</title>
+</head>
+    <main>
+        <div>
+                <div class="dados">
+                    <label for="" class="login">LOGIN</label>
+                    <label for="username">Usuário:</label>
+                    <input type="text" id="usuario" name="usuario" required>
+
+                    <label for="password">Senha:</label>
+                    <input type="password" id="senha" name="senha" required>
+
+                    <button type="button" onclick="validarDados()">Entrar</button>
+                </div>      
+        </div>
+
+        
+
+
+        <script>
+            var Usuarios;  // Lista de usuários
+
+            function validarDados() {
+                $(document).ready(function () {
+                    $.ajax({
+                        url: "http://localhost:8989/Usuario",
+                        method: "GET"
+                    }).then(function (data, status, info) {
+                        Usuarios = data;
+
+                        var nome = document.getElementById('usuario').value;
+                        var senha = document.getElementById('senha').value;
+
+                        // Verificando as credenciais em todos os usuários na lista
+                        var credenciaisCorretas = Usuarios.some(function (usuario) {
+                        return usuario.codigoUsuario === nome && usuario.senhaUsuario === senha;
+                    });
+
+                    if (credenciaisCorretas) {
+                        window.location.href = 'menu.html';
+                        document.getElementById('msgErro').value = 'sucesses';
+                    } else {
+                        alert('Dados Incorretos ou usuario não cadastrados');
+                    }
+                });
+            });
+        }
+        </script> 
+    </main>
+
+</body>
+</html>
